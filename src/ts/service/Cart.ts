@@ -13,19 +13,15 @@ export default class Cart {
     };
 
     totalAmount(): number {
-        let total: number = 0
-        for (let item of this._items) {
-            total += item.price
-        }
+        let total: number = this._items.reduce((totalAmount, item) => {
+            return totalAmount + item.price
+        }, 0)
         return total
     };
 
     AmountWithDiscount(discount: number): number {
-        let total: number = 0
-        for (let item of this._items) {
-            total += item.price * ((100 - discount) / 100)
-        }
-        return total
+        let total: number = this.totalAmount()
+        return (total * ((100 - discount) / 100))
     }
 
     deleteObject(id: number): void {
